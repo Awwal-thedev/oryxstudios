@@ -564,7 +564,7 @@
 
 @media (max-width: 768px) {
   /* Masthead overrides for mobile */
-  .landing-page {
+  .home-content-curtain {
     padding-top: 100px !important; /* Reduce inline padding on mobile */
   }
   
