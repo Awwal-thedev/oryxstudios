@@ -1,20 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import './Navigation.css';
 
 const Navigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
   return (
     <nav className="navigation frosty">
       <div className="nav-container">
-        <Link to="/" className="nav-brand">
+        
+        {/* Mobile Hamburger Menu (Left) */}
+        <button 
+          className="mobile-menu-btn" 
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle navigation"
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+
+        {/* Brand (Center on mobile, Left on desktop) */}
+        <Link to="/" className="nav-brand" onClick={() => setIsOpen(false)}>
           <div className="avatar-placeholder">A</div>
-          <span>Awwal Adeyemo</span>
+          <span className="brand-name">Awwal Adeyemo</span>
         </Link>
-        <div className="nav-links">
-          <a href="/#work" className="nav-link">Work</a>
-          <Link to="/about" className="nav-link">About</Link>
-          <a href="mailto:awwal.adeyemoola@gmail.com" className="nav-link contact-btn">Let's Talk</a>
+
+        {/* Desktop Links / Mobile Overlay */}
+        <div className={`nav-links ${isOpen ? 'active' : ''}`}>
+          <a href="/#work" className="nav-link" onClick={() => setIsOpen(false)}>Work</a>
+          <Link to="/about" className="nav-link" onClick={() => setIsOpen(false)}>About</Link>
+          <a href="mailto:awwal.adeyemoola@gmail.com" className="nav-link contact-btn desktop-only" onClick={() => setIsOpen(false)}>Let's Talk</a>
         </div>
+
+        {/* Mobile Static Contact Button (Right) */}
+        <a href="mailto:awwal.adeyemoola@gmail.com" className="nav-link contact-btn mobile-only">Let's Talk</a>
+
       </div>
     </nav>
   );

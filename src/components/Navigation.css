@@ -63,30 +63,91 @@
 }
 
 .contact-btn:hover {
-  opacity: 0.9;
+  background-color: var(--text-secondary);
+  color: var(--bg-secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem; /* Rounded square outline */
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 101;
+  position: relative;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.mobile-menu-btn:active {
+  transform: scale(0.95);
+  background-color: var(--bg-secondary);
 }
 
 /* Responsive Overrides */
 @media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: inline-flex !important;
+  }
+
   .nav-container {
-    padding: 1rem;
+    justify-content: space-between;
+    gap: 0.5rem;
   }
-  
+
+  .nav-brand {
+    position: relative;
+    z-index: 101;
+  }
+
   .nav-brand span {
-    font-size: 1rem;
+    font-size: 1rem; /* Slightly smaller text so it fits with buttons on both sides */
   }
-  
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .nav-links {
-    gap: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-primary);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
   }
-  
-  /* Hide the Work text link on very small screens to save space */
-  .nav-link:not(.contact-btn) {
-    display: none;
+
+  .nav-links.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
-  
-  .contact-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+
+  .nav-links .nav-link {
+    font-size: 2.5rem;
+    font-weight: 600;
   }
 }

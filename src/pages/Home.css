@@ -423,6 +423,18 @@
   padding-bottom: 4rem;
 }
 
+/* Fix for mobile pull-to-refresh overscroll revealing the footer */
+.home-content-curtain::before {
+  content: "";
+  position: absolute;
+  top: -100vh;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-primary);
+  z-index: 2;
+}
+
 .footer-reveal {
   position: fixed;
   bottom: 0;
@@ -458,15 +470,23 @@
 
 .footer-bottom-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   margin-bottom: 3rem;
+}
+
+.footer-bottom-grid > div:first-child {
+  grid-column: 1 / -1;
 }
 
 @media (min-width: 768px) {
   .footer-bottom-grid {
     grid-template-columns: 2fr 1fr 1fr;
     gap: 2rem;
+  }
+  
+  .footer-bottom-grid > div:first-child {
+    grid-column: auto;
   }
 }
 
