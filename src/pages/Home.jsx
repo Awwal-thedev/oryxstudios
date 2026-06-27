@@ -58,10 +58,14 @@ const Home = () => {
             initial="hidden"
             animate="visible"
           >
-            {titleText.split("").map((char, index) => (
-              <motion.span key={index} variants={typingCharVariants}>
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
+            {titleText.split(/(\s+)/).map((word, wordIndex) => (
+              <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+                {word.split("").map((char, charIndex) => (
+                  <motion.span key={charIndex} variants={typingCharVariants}>
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </span>
             ))}
             {/* Blinking Cursor */}
             <motion.span
