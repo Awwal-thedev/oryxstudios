@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, MoveRight, ChevronDown } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import AsciiPortrait from '../components/AsciiPortrait';
 import './Home.css';
 
 const Home = () => {
@@ -46,36 +47,49 @@ const Home = () => {
   };
 
   return (
-    <div className="landing-page" style={{ paddingTop: '200px' }}>
+    <div className="landing-page">
+      <div className="home-content-curtain" style={{ paddingTop: '200px' }}>
       
       {/* 1. MASTHEAD HERO SECTION */}
       <section className="hero-masthead container">
         <div className="masthead-header">
-          {/* Typewriter Text Reveal */}
-          <motion.h1 
-            className="masthead-title"
-            variants={typingContainerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {titleText.split(/(\s+)/).map((word, wordIndex) => (
-              <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
-                {word.split("").map((char, charIndex) => (
-                  <motion.span key={charIndex} variants={typingCharVariants}>
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </span>
-            ))}
-            {/* Blinking Cursor */}
-            <motion.span
-              animate={{ opacity: [1, 0] }}
-              transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-              style={{ display: "inline-block", marginLeft: "4px", borderRight: "0.08em solid var(--text-primary)" }}
+          <div className="masthead-text-wrap">
+            {/* Typewriter Text Reveal */}
+            <motion.h1 
+              className="masthead-title"
+              variants={typingContainerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              &nbsp;
-            </motion.span>
-          </motion.h1>
+              {titleText.split(/(\s+)/).map((word, wordIndex) => (
+                <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+                  {word.split("").map((char, charIndex) => (
+                    <motion.span key={charIndex} variants={typingCharVariants}>
+                      {char === " " ? "\u00A0" : char}
+                    </motion.span>
+                  ))}
+                </span>
+              ))}
+              
+              {/* Blinking Cursor */}
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                style={{ display: "inline-block", marginLeft: "4px", borderRight: "0.08em solid var(--text-primary)" }}
+              >
+                &nbsp;
+              </motion.span>
+            </motion.h1>
+          </div>
+
+          <motion.div 
+            className="masthead-interactive-portrait"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+          >
+            <AsciiPortrait imageSrc="/headshot.png" />
+          </motion.div>
         </div>
         
         <motion.div 
@@ -84,6 +98,31 @@ const Home = () => {
           initial="hidden"
           animate="visible"
         >
+          {/* Fun floating elements */}
+          <div className="fun-elements-container">
+            <motion.div 
+              className="floating-badge badge-1"
+              animate={{ y: [0, -15, 0], rotate: [-5, 5, -5] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            >
+              🚀 Strategy
+            </motion.div>
+            <motion.div 
+              className="floating-badge badge-2"
+              animate={{ y: [0, 20, 0], rotate: [5, -5, 5] }}
+              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
+            >
+              ✨ Design Engineer
+            </motion.div>
+            <motion.div 
+              className="floating-badge badge-3"
+              animate={{ y: [0, -10, 0], scale: [1, 1.1, 1] }}
+              transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
+            >
+              ⚡ Product Building
+            </motion.div>
+          </div>
+
           <motion.div className="masthead-col small-col" variants={fadeUp}>
             <div className="masthead-meta">
               <span className="meta-label">Focus</span>
@@ -101,7 +140,7 @@ const Home = () => {
           
           <motion.div className="masthead-col main-col" variants={fadeUp}>
             <h2 className="masthead-statement">
-              I turn complex workflows into <span className="text-accent">intuitive enterprise experiences.</span>
+              I turn complex workflows into <span className="text-gradient">intuitive enterprise experiences.</span>
             </h2>
             <p className="masthead-description">
               Helping healthcare, fintech, and enterprise SaaS organizations build products that reduce cognitive load and drive business outcomes.
@@ -255,27 +294,54 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 4. FOOTER / CTA */}
-      <section className="cta-section container">
-        <motion.div 
-          className="cta-box"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2>Have a complex product challenge?</h2>
-          <p>Let's collaborate to build experiences that scale and perform.</p>
-          <motion.a 
-            href="mailto:hello@example.com" 
-            className="btn-primary large"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get in touch <MoveRight size={20} />
-          </motion.a>
-        </motion.div>
-      </section>
+      </div> {/* End home-content-curtain */}
+
+      {/* 4. FOOTER / CTA (Sticky Reveal) */}
+      <footer className="footer-reveal">
+        <div className="footer-inner container">
+          
+          {/* Massive Typographic Name */}
+          <div className="footer-massive-text">
+            Awwal.
+          </div>
+          
+          <div className="footer-bottom-grid">
+            <div className="footer-col">
+              <h4>Crafted with intent.</h4>
+              <p>Built to outlive trends and scale gracefully.</p>
+              
+              <div className="footer-cta-wrap">
+                <p>Have a complex product challenge?</p>
+                <motion.a 
+                  href="mailto:awwal.adeyemoola@gmail.com" 
+                  className="btn-light"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Start a conversation <MoveRight size={16} />
+                </motion.a>
+              </div>
+            </div>
+            
+            <div className="footer-col">
+              <h4>Navigation</h4>
+              <a href="/#work">Work</a>
+              <Link to="/about">About</Link>
+            </div>
+            
+            <div className="footer-col">
+              <h4>Socials</h4>
+              <a href="https://www.instagram.com/miday__999/" target="_blank" rel="noreferrer">Instagram</a>
+              <a href="https://x.com/miday__999" target="_blank" rel="noreferrer">Twitter</a>
+              <a href="https://github.com/Awwal-thedev" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+          
+          <div className="footer-copyright">
+            © {new Date().getFullYear()} Awwal Adeyemo. Rooted in craft, refined through code.
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

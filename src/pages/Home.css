@@ -1,7 +1,6 @@
 /* General Landing Page Styles */
 .landing-page {
   width: 100%;
-  padding-top: 150px; /* Explicit padding to clear the fixed navbar */
 }
 
 .section-title {
@@ -24,6 +23,23 @@
   border-bottom: 2px solid var(--text-primary);
   padding-bottom: 1rem;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.masthead-text-wrap {
+  flex: 1;
+  min-width: 300px;
+}
+
+.masthead-interactive-portrait {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .masthead-title {
@@ -42,6 +58,7 @@
   grid-template-columns: 1fr 2fr 1fr;
   gap: 3rem;
   align-items: start;
+  position: relative;
 }
 
 .masthead-col {
@@ -86,11 +103,60 @@
 }
 
 .masthead-description {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 600px;
+  margin-bottom: 2.5rem;
+  max-width: 90%;
+}
+
+/* Fun Floating Badges */
+.fun-elements-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let clicks pass through to elements behind */
+  z-index: 0;
+}
+
+.floating-badge {
+  position: absolute;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  pointer-events: auto; /* Make them interactive if hovered */
+  cursor: grab;
+  z-index: 10;
+}
+
+.floating-badge:hover {
+  background: white;
+  transform: scale(1.1) !important; /* Override framer-motion temporarily on hover */
+}
+
+.badge-1 {
+  top: -45px; /* Shifted up from -20px */
+  right: 10%;
+  color: var(--accent-primary);
+}
+
+.badge-2 {
+  top: 40px; /* Moved up a bit */
+  left: 17%; /* Shifted to the right a bit more */
+  color: var(--accent-secondary);
+}
+
+.badge-3 {
+  top: 50%;
+  right: 25%;
+  color: var(--accent-tertiary);
 }
 
 .masthead-actions {
@@ -255,6 +321,28 @@
   color: var(--text-secondary);
 }
 
+.status-indicator span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ASCII Portrait Treatment (Interactive Canvas) */
+.interactive-ascii-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.interactive-ascii-canvas {
+  cursor: crosshair; /* Encourages hovering */
+  transition: transform 0.3s ease;
+}
+
+.interactive-ascii-canvas:hover {
+  transform: scale(1.02);
+}
+
 .project-title {
   font-size: 3rem;
   margin-bottom: 1.5rem;
@@ -323,21 +411,102 @@
   line-height: 1.6;
 }
 
-/* 4. CTA SECTION */
-.cta-section {
-  padding-top: 8rem;
-  padding-bottom: 4rem; /* Reduced to provide a nice, modest gap at the bottom */
+/* 4. CTA SECTION / REVEAL FOOTER */
+.home-content-curtain {
+  position: relative;
+  z-index: 2;
+  background-color: var(--bg-primary);
+  margin-bottom: 100vh; /* Full screen reveal */
+  border-bottom-left-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  padding-bottom: 4rem;
 }
 
-.cta-box {
+.footer-reveal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Full screen height */
+  z-index: 1;
   background-color: var(--text-primary);
-  color: var(--bg-secondary);
-  padding: 6rem 4rem;
-  border-radius: 2rem;
-  text-align: center;
+  color: var(--bg-primary);
+  display: flex;
+  padding-bottom: 2rem;
+  padding-top: 6rem; /* Start the massive text near the top */
+}
+
+.footer-inner {
+  width: 100%;
+  height: 100%; /* Take full height */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between; /* Push text to top, grid to bottom */
+}
+
+.footer-massive-text {
+  font-size: clamp(6rem, 20vw, 25rem);
+  font-weight: 800;
+  line-height: 0.75;
+  letter-spacing: -0.05em;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  color: var(--bg-primary);
+}
+
+.footer-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .footer-bottom-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.footer-col h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--bg-primary);
+}
+
+.footer-col p {
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+}
+
+.footer-col a:not([class*="btn-"]) {
+  display: block;
+  color: var(--text-tertiary);
+  margin-bottom: 0.75rem;
+  transition: color 0.2s;
+  width: fit-content;
+}
+
+.footer-col a:not([class*="btn-"]):hover {
+  color: var(--bg-primary);
+}
+
+.footer-cta-wrap {
+  margin-top: 2rem;
+}
+.footer-cta-wrap p {
+  margin-bottom: 1rem;
+  color: var(--bg-primary);
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 2rem;
 }
 
 .cta-box h2 {
