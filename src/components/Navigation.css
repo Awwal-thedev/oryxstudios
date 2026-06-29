@@ -25,17 +25,10 @@
   font-size: 1.125rem;
 }
 
-.avatar-placeholder {
-  width: 32px;
+.nav-logo {
   height: 32px;
-  background-color: var(--text-primary);
-  color: var(--bg-secondary);
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.875rem;
-  font-weight: 700;
+  width: auto;
+  display: block;
 }
 
 .nav-links {

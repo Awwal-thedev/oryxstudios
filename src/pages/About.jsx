@@ -54,7 +54,7 @@ const About = () => {
           animate="visible"
         >
           <motion.div className="about-text-col" variants={fadeUp}>
-            <h1 className="about-title">I'm Awwal. I build digital products with intent.</h1>
+            <h1 className="about-title">I am Awwal. I build products with intent.</h1>
             <div className="about-prose">
               <p>
                 I am a multi-disciplinary designer and engineer focused on bridging the gap between aesthetics and highly functional architecture. 

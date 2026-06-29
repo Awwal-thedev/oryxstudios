@@ -28,7 +28,8 @@ const Home = () => {
   };
 
   // Typewriter Animation Logic
-  const titleText = "PRODUCT & DESIGN";
+  const titleLine1 = "BUILDING IMPACTFUL BRANDS";
+  const titleLine2 = "AND DIGITAL PRODUCTS";
   
   const typingContainerVariants = {
     hidden: { opacity: 1 },
@@ -61,24 +62,37 @@ const Home = () => {
               initial="hidden"
               animate="visible"
             >
-              {titleText.split(/(\s+)/).map((word, wordIndex) => (
-                <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
-                  {word.split("").map((char, charIndex) => (
-                    <motion.span key={charIndex} variants={typingCharVariants}>
-                      {char === " " ? "\u00A0" : char}
-                    </motion.span>
-                  ))}
-                </span>
-              ))}
-              
-              {/* Blinking Cursor */}
-              <motion.span
-                animate={{ opacity: [1, 0] }}
-                transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
-                style={{ display: "inline-block", marginLeft: "4px", borderRight: "0.08em solid var(--text-primary)" }}
-              >
-                &nbsp;
-              </motion.span>
+              <div style={{ display: "block" }}>
+                {titleLine1.split(/(\s+)/).map((word, wordIndex) => (
+                  <span key={`l1-${wordIndex}`} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+                    {word.split("").map((char, charIndex) => (
+                      <motion.span key={charIndex} variants={typingCharVariants}>
+                        {char === " " ? "\u00A0" : char}
+                      </motion.span>
+                    ))}
+                  </span>
+                ))}
+              </div>
+              <div style={{ display: "block" }}>
+                {titleLine2.split(/(\s+)/).map((word, wordIndex) => (
+                  <span key={`l2-${wordIndex}`} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+                    {word.split("").map((char, charIndex) => (
+                      <motion.span key={charIndex} variants={typingCharVariants}>
+                        {char === " " ? "\u00A0" : char}
+                      </motion.span>
+                    ))}
+                  </span>
+                ))}
+                
+                {/* Blinking Cursor */}
+                <motion.span
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ repeat: Infinity, duration: 0.8, ease: "linear" }}
+                  style={{ display: "inline-block", marginLeft: "4px", borderRight: "0.08em solid var(--text-primary)" }}
+                >
+                  &nbsp;
+                </motion.span>
+              </div>
             </motion.h1>
           </div>
 
@@ -87,8 +101,9 @@ const Home = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <AsciiPortrait imageSrc="/headshot.png" />
+            <AsciiPortrait imageSrc="/oryx-hero-stacked.png" />
           </motion.div>
         </div>
         
@@ -105,32 +120,32 @@ const Home = () => {
               animate={{ y: [0, -15, 0], rotate: [-5, 5, -5] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
             >
-              🚀 Strategy
+              🚀 Brand Strategy
             </motion.div>
             <motion.div 
               className="floating-badge badge-2"
               animate={{ y: [0, 20, 0], rotate: [5, -5, 5] }}
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
             >
-              ✨ Design Engineer
+              ✨ Product Design
             </motion.div>
             <motion.div 
               className="floating-badge badge-3"
               animate={{ y: [0, -10, 0], scale: [1, 1.1, 1] }}
               transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
             >
-              ⚡ Product Building
+              ⚡ Web Development
             </motion.div>
           </div>
 
           <motion.div className="masthead-col small-col" variants={fadeUp}>
             <div className="masthead-meta">
               <span className="meta-label">Focus</span>
-              <span className="meta-value">Enterprise SaaS & AI</span>
+              <span className="meta-value">Brands & Products</span>
             </div>
             <div className="masthead-meta">
-              <span className="meta-label">Role</span>
-              <span className="meta-value">Product Manager & Designer</span>
+              <span className="meta-label">Approach</span>
+              <span className="meta-value">Strategy & Design</span>
             </div>
             <div className="masthead-meta">
               <span className="meta-label">Location</span>
@@ -140,7 +155,7 @@ const Home = () => {
           
           <motion.div className="masthead-col main-col" variants={fadeUp}>
             <h2 className="masthead-statement">
-              I turn complex workflows into <span className="text-gradient">intuitive enterprise experiences.</span>
+              We turn complex workflows into <span className="text-gradient">intuitive enterprise experiences.</span>
             </h2>
             <p className="masthead-description">
               Helping healthcare, fintech, and enterprise SaaS organizations build products that reduce cognitive load and drive business outcomes.
@@ -160,11 +175,11 @@ const Home = () => {
           <motion.div className="masthead-col small-col right-col" variants={fadeUp}>
             <div className="status-indicator">
               <div className="status-dot"></div>
-              <span>Available for new opportunities</span>
+              <span>Available for new projects</span>
             </div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link to="/about" className="btn-secondary read-more-btn">
-                Read full bio <ArrowRight size={16} />
+                About the studio <ArrowRight size={16} />
               </Link>
             </motion.div>
           </motion.div>
@@ -265,7 +280,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            Core Expertise
+            What We Do
           </motion.h2>
           
           <motion.div 
@@ -277,18 +292,18 @@ const Home = () => {
           >
             <motion.div className="expertise-card" variants={fadeUp} whileHover={{ y: -10 }}>
               <div className="expertise-icon">🎯</div>
-              <h3>Product Strategy</h3>
-              <p>Bridging the gap between business goals and user needs through feature planning, journey mapping, and clear product direction.</p>
-            </motion.div>
-            <motion.div className="expertise-card" variants={fadeUp} whileHover={{ y: -10 }}>
-              <div className="expertise-icon">🧩</div>
-              <h3>Systems Thinking</h3>
-              <p>Organizing complex enterprise information architecture, creating scalable design systems, and ensuring cross-platform consistency.</p>
+              <h3>Brand Identity Design</h3>
+              <p>Crafting comprehensive visual identity systems, from logo design and brand strategy to typography and cohesive brand guidelines.</p>
             </motion.div>
             <motion.div className="expertise-card" variants={fadeUp} whileHover={{ y: -10 }}>
               <div className="expertise-icon">✨</div>
-              <h3>Interaction Design</h3>
-              <p>Crafting high-density dashboards, user flows, and responsive interfaces that reduce friction and cognitive load for expert users.</p>
+              <h3>UI/UX & Product Design</h3>
+              <p>Designing intuitive, user-centered digital products, enterprise SaaS applications, and design systems built to scale.</p>
+            </motion.div>
+            <motion.div className="expertise-card" variants={fadeUp} whileHover={{ y: -10 }}>
+              <div className="expertise-icon">⚡</div>
+              <h3>Website Development</h3>
+              <p>Building fast, responsive, and accessible modern websites using the latest front-end technologies to deliver seamless experiences.</p>
             </motion.div>
           </motion.div>
         </div>
@@ -302,23 +317,23 @@ const Home = () => {
           
           {/* Massive Typographic Name */}
           <div className="footer-massive-text">
-            Awwal.
+            Oryx Studios
           </div>
           
           <div className="footer-bottom-grid">
             <div className="footer-col">
-              <h4>Crafted with intent.</h4>
-              <p>Built to outlive trends and scale gracefully.</p>
+              <h4>Our Promise</h4>
+              <p>We don't just create beautiful designs. We create experiences that help businesses communicate better, build trust faster, and grow sustainably.</p>
               
               <div className="footer-cta-wrap">
-                <p>Have a complex product challenge?</p>
+                <p>Ready to start your next project?</p>
                 <motion.a 
-                  href="mailto:awwal.adeyemoola@gmail.com" 
+                  href="mailto:hello@oryxstudios.co" 
                   className="btn-light"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Start a conversation <MoveRight size={16} />
+                  Let's Work Together <MoveRight size={16} />
                 </motion.a>
               </div>
             </div>
@@ -330,15 +345,15 @@ const Home = () => {
             </div>
             
             <div className="footer-col">
-              <h4>Socials</h4>
-              <a href="https://www.instagram.com/miday__999/" target="_blank" rel="noreferrer">Instagram</a>
-              <a href="https://x.com/miday__999" target="_blank" rel="noreferrer">Twitter</a>
-              <a href="https://github.com/Awwal-thedev" target="_blank" rel="noreferrer">GitHub</a>
+              <h4>Contact</h4>
+              <a href="mailto:hello@oryxstudios.co">Email Us</a>
+              <a href="https://x.com/oryxstudiosng" target="_blank" rel="noreferrer">Twitter</a>
+              <a href="https://instagram.com/oryxstudiosng" target="_blank" rel="noreferrer">Instagram</a>
             </div>
           </div>
           
           <div className="footer-copyright">
-            © {new Date().getFullYear()} Awwal Adeyemo. Rooted in craft, refined through code.
+            © {new Date().getFullYear()} Oryx Studios. A creative digital studio.
           </div>
         </div>
       </footer>

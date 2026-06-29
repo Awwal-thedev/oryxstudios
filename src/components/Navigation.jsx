@@ -28,8 +28,7 @@ const Navigation = () => {
 
           {/* Brand (Center on mobile, Left on desktop) */}
           <Link to="/" className="nav-brand" onClick={() => setIsOpen(false)}>
-            <div className="avatar-placeholder">A</div>
-            <span className="brand-name">Awwal Adeyemo</span>
+            <img src="/oryx-logo.png" alt="Oryx Studios Logo" className="nav-logo" />
           </Link>
         </div>
 
@@ -37,11 +36,11 @@ const Navigation = () => {
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
           <a href="/#work" className="nav-link" onClick={() => setIsOpen(false)}>Work</a>
           <Link to="/about" className="nav-link" onClick={() => setIsOpen(false)}>About</Link>
-          <a href="mailto:awwal.adeyemoola@gmail.com" className="nav-link contact-btn desktop-only" onClick={() => setIsOpen(false)}>Let's Talk</a>
+          <a href="mailto:hello@oryxstudios.co" className="nav-link contact-btn desktop-only" onClick={() => setIsOpen(false)}>Let's Work</a>
         </div>
 
         {/* Mobile Static Contact Button (Right) */}
-        <a href="mailto:awwal.adeyemoola@gmail.com" className="nav-link contact-btn mobile-only">Let's Talk</a>
+        <a href="mailto:hello@oryxstudios.co" className="nav-link contact-btn mobile-only">Let's Work</a>
 
       </div>
     </nav>
