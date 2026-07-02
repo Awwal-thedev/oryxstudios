@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import './Navigation.css';
 
-const Navigation = () => {
+const Navigation = ({ openContact }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
@@ -36,11 +36,11 @@ const Navigation = () => {
         <div className={`nav-links ${isOpen ? 'active' : ''}`}>
           <a href="/#work" className="nav-link" onClick={() => setIsOpen(false)}>Work</a>
           <Link to="/about" className="nav-link" onClick={() => setIsOpen(false)}>About</Link>
-          <a href="mailto:hello@oryxstudios.co" className="nav-link contact-btn desktop-only" onClick={() => setIsOpen(false)}>Let's Work</a>
+          <a href="#" className="nav-link contact-btn desktop-only" onClick={(e) => { e.preventDefault(); setIsOpen(false); openContact(); }}>Let's Work</a>
         </div>
 
         {/* Mobile Static Contact Button (Right) */}
-        <a href="mailto:hello@oryxstudios.co" className="nav-link contact-btn mobile-only">Let's Work</a>
+        <a href="#" className="nav-link contact-btn mobile-only" onClick={(e) => { e.preventDefault(); openContact(); }}>Let's Work</a>
 
       </div>
     </nav>

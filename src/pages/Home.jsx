@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import AsciiPortrait from '../components/AsciiPortrait';
 import './Home.css';
 
-const Home = () => {
+const Home = ({ openContact }) => {
   const scrollToWork = () => {
     document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
   };
@@ -327,14 +327,15 @@ const Home = () => {
               
               <div className="footer-cta-wrap">
                 <p>Ready to start your next project?</p>
-                <motion.a 
-                  href="mailto:hello@oryxstudios.co" 
+                <motion.button 
+                  onClick={(e) => { e.preventDefault(); openContact(); }}
                   className="btn-light"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  style={{ border: 'none', cursor: 'pointer' }}
                 >
                   Let's Work Together <MoveRight size={16} />
-                </motion.a>
+                </motion.button>
               </div>
             </div>
             
