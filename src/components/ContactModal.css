@@ -20,11 +20,11 @@
   border: 1px solid #e5e7eb;
   border-radius: 1.5rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 450px; /* slightly narrower modal */
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  padding: 2rem;
+  padding: 1.5rem; /* Reduced from 2rem to reduce white space to the sides */
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   font-family: inherit;
   
@@ -48,7 +48,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem; /* Reduced from 2rem */
 }
 
 .modal-header-inline h2 {
@@ -79,13 +79,13 @@
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem; /* Reduced from 1.25rem */
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: 1rem; /* Reduced from 1.25rem */
 }
 
 .form-group {
@@ -230,7 +230,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 1rem 0;
 }
 
 .icon-glow-wrapper {
@@ -238,7 +238,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .icon-glow-wrapper::before {
@@ -264,7 +264,7 @@
   font-size: 2rem;
   font-weight: 700;
   color: #111827;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   letter-spacing: -0.03em;
 }
 

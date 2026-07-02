@@ -104,7 +104,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 </div>
                 <h3 className="success-title">Amazing!</h3>
                 <p className="success-subtitle">Thanks for reaching out! We've received your request and will get back to you within 24 hours.</p>
-                <button className="btn-solid-blue" onClick={onClose} style={{ marginTop: '2.5rem', width: '100%' }}>
+                <button className="btn-solid-blue" onClick={onClose} style={{ marginTop: '1.5rem', width: '100%' }}>
                   Return to Site
                 </button>
               </motion.div>
