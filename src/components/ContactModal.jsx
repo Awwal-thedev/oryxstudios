@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Confetti from 'react-confetti';
 import { X, Send, CheckCircle2, Globe, Palette, Lightbulb } from 'lucide-react';
 import './ContactModal.css';
 
@@ -86,14 +87,25 @@ const ContactModal = ({ isOpen, onClose }) => {
             {status === 'success' ? (
               <motion.div 
                 className="success-state"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.4, type: 'spring' }}
               >
-                <CheckCircle2 size={64} className="success-icon blue-accent" />
-                <h3>Thanks for reaching out!</h3>
-                <p>We'll get back to you within 24 hours.</p>
-                <button className="btn-solid-blue" onClick={onClose} style={{ marginTop: '2rem', width: '100%' }}>
-                  Close
+                <Confetti 
+                  width={window.innerWidth} 
+                  height={window.innerHeight} 
+                  recycle={false} 
+                  numberOfPieces={500} 
+                  gravity={0.15}
+                  style={{ position: 'fixed', top: 0, left: 0, zIndex: 10000, pointerEvents: 'none' }}
+                />
+                <div className="icon-glow-wrapper">
+                  <CheckCircle2 size={72} className="success-icon blue-accent glowing-icon" />
+                </div>
+                <h3 className="success-title">Amazing!</h3>
+                <p className="success-subtitle">Thanks for reaching out! We've received your request and will get back to you within 24 hours.</p>
+                <button className="btn-solid-blue" onClick={onClose} style={{ marginTop: '2.5rem', width: '100%' }}>
+                  Return to Site
                 </button>
               </motion.div>
             ) : (
@@ -128,7 +140,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="phone">Phone Number</label>
+                  <label htmlFor="phone">Phone Number <span className="optional-text">(Optional)</span></label>
                   <input 
                     type="tel" 
                     id="phone" 
