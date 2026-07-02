@@ -24,7 +24,7 @@
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
-  padding: 2.5rem; /* Generous padding like in the screenshot */
+  padding: 1.5rem; /* Reduced outer margin/padding */
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   font-family: inherit;
   
@@ -48,13 +48,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem; /* Reduced gap between heading and inner border */
 }
 
 .modal-inner-border {
   border: 1px solid #e5e7eb;
   border-radius: 1.5rem;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .modal-header-inline h2 {
@@ -198,7 +198,7 @@
   background-color: #3b82f6;
   color: #ffffff;
   border: none;
-  padding: 0.85rem 1.5rem;
+  padding: 1.15rem 1.5rem; /* Increased top and bottom padding */
   border-radius: 9999px; /* Pill shape */
   font-weight: 600;
   font-size: 1rem;

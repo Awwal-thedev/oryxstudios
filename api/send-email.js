@@ -1,4 +1,6 @@
 import { Resend } from 'resend';
+import { generateContactNotification } from '../emails/contact-notification.js';
+import { generateClientAutoReply } from '../emails/client-auto-reply.js';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -32,25 +34,25 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Message too long' });
     }
 
-    // 4. Send the email using Resend
-    const data = await resend.emails.send({
-      from: 'Oryx Studios <info@oryxstudios.co>',
-      to: ['oryxstudiosng@gmail.com'],
-      reply_to: email, // This allows you to hit "Reply" directly in Gmail
-      subject: `New Project Inquiry from ${name}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-        <br/>
-        <p><strong>Brief Overview:</strong></p>
-        <p>${message.replace(/\n/g, '<br/>')}</p>
-      `,
-    });
+    // 4. Send the emails in a batch using Resend
+    const { data, error } = await resend.batch.send([
+      {
+        from: 'Oryx Studios <info@oryxstudios.co>',
+        to: ['oryxstudiosng@gmail.com'],
+        subject: `New Project Inquiry from ${name}`,
+        html: generateContactNotification({ name, email, phone, message }),
+        reply_to: email,
+      },
+      {
+        from: 'Oryx Studios <info@oryxstudios.co>',
+        to: [email],
+        subject: 'We received your request - Oryx Studios',
+        html: generateClientAutoReply(name),
+      }
+    ]);
 
-    if (data.error) {
-      console.error('Resend Error:', data.error);
+    if (error) {
+      console.error('Resend Error:', error);
       return res.status(500).json({ error: 'Failed to send email. Please try again later.' });
     }
 
