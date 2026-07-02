@@ -84,9 +84,10 @@ const ContactModal = ({ isOpen, onClose }) => {
               </button>
             </div>
 
-            {status === 'success' ? (
-              <motion.div 
-                className="success-state"
+            <div className="modal-inner-border">
+              {status === 'success' ? (
+                <motion.div 
+                  className="success-state"
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.4, type: 'spring' }}
@@ -196,6 +197,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                 </button>
               </form>
             )}
+            </div>
           </motion.div>
         </motion.div>
       )}

@@ -51,6 +51,12 @@
   margin-bottom: 2rem;
 }
 
+.modal-inner-border {
+  border: 1px solid #e5e7eb;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+}
+
 .modal-header-inline h2 {
   font-size: 1.25rem;
   font-weight: 600;
